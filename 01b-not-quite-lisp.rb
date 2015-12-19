@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/1
+
 parens = gets.chomp
 floor = 0
 

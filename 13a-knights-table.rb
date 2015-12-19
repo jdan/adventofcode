@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/13
+
 seating = {}
 people = []
 

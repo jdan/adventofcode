@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/2
+
 ARGF.each do |line|
     a, b, c = line.split("x").map(&:to_i).sort
 

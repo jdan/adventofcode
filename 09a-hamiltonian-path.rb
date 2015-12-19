@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/9
+
 require "set"
 
 graph = Hash.new

@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/5
+
 total = 0
 
 ARGF.each do |line|

@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/3
+
 presents = Hash.new(0)
 position = [0, 0]
 

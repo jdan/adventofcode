@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/6
+
 lights = Array.new(1000) {
     Array.new(1000, false)
 }

@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/10
+
 def look_and_say_next(seq)
     build = ""
     last_char = nil

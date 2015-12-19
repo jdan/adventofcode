@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/7
+
 wires = {}
 
 def get_value(wires, value)

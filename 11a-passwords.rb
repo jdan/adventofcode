@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/11
+
 def valid_password?(password)
     /(.)\1.*(.)\2/ === password and
     /abc|bcd|cde|def|efg|fgh|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz/ === password

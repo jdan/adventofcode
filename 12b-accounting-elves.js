@@ -1,3 +1,5 @@
+// http://adventofcode.com/day/12
+
 var numbers = [];
 
 var readline = require("readline");

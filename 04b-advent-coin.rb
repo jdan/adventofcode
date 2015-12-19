@@ -1,3 +1,5 @@
+# http://adventofcode.com/day/4
+
 require "digest"
 
 prefix = gets.chomp
