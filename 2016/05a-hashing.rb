@@ -1,3 +1,5 @@
+# http://adventofcode.com/2016/day/5
+
 require "digest"
 
 door_id = gets.chomp
