@@ -36,17 +36,16 @@ def give_to_bot(bot, value, reactive = false)
         @listeners[bot].()
     end
 
-    # This is where we check what the bot is comparing
-    if bot_state[:low] == 17 && bot_state[:high] == 61
-        puts "Bot #{bot} compares 17 and 61!"
-        exit
-    end
-
     @state[:bots][bot] = bot_state
 end
 
 def give_to_output(output, value)
     @state[:outputs][output] = value
+
+    if @state[:outputs][0] && @state[:outputs][1] && @state[:outputs][2]
+        puts @state[:outputs][0] * @state[:outputs][1] * @state[:outputs][2]
+        exit
+    end
 end
 
 def set_bot_listener(bot, low_type, low_dest, high_type, high_dest)
