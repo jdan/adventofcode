@@ -7,34 +7,31 @@
   [coll idx]
   (nth coll (mod idx (count coll))))
 
-(defn run-2017-01a
-  [lines]
-  (let [line (first lines)
-        input (map #(Integer. %1)
-                   (str/split line #""))]
-    (reduce
-     +
-     (map-indexed
-      (fn [idx item]
-        (let [next (nth-mod input (inc idx))]
-          (if (= item next)
+(defn sum-matches
+  "Shared code for parts A and B, in which we sum up matching values
+   in a row based on a `get-next-item` function which computes the
+   next item in a list based on the current index."
+  [get-next-item]
+  (fn [lines]
+    (let [line (first lines)
+          input (map #(Integer. %1)
+                     (str/split line #""))]
+      (reduce
+       +
+       (map-indexed
+        (fn [idx item]
+          (if (= item (get-next-item input idx))
             item
-            0)))
-      input))))
+            0))
+        input)))))
 
-(defn run-2017-01b
-  [lines]
-  (let [line (first lines)
-        input (map #(Integer. %1)
-                   (str/split line #""))]
-    (reduce
-     +
-     (map-indexed
-      (fn [idx item]
-        (let [next (nth-mod input
-                            (+ idx
-                               (/ (count input) 2)))]
-          (if (= item next)
-            item
-            0)))
-      input))))
+(def run-2017-01a
+  (sum-matches
+   (fn [input idx] (nth-mod input (inc idx)))))
+
+(def run-2017-01b
+  (sum-matches
+   (fn [input idx]
+     (nth-mod input
+              (+ (/ (count input) 2)
+                 idx)))))
