@@ -1,9 +1,11 @@
 (ns adventofcode.core
-  (require [adventofcode.2017.01-captcha :refer :all]))
+  (require [adventofcode.2017.01-captcha :refer :all]
+           [adventofcode.2017.03-spiral :refer :all]))
 
 (def runners
   {"2017.01a" run-2017-01a
-   "2017.01b" run-2017-01b})
+   "2017.01b" run-2017-01b
+   "2017.03a" run-2017-03a})
 
 (defn run [id input]
   (let [runner (runners id)]
