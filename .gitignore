@@ -1,1 +1,8 @@
 inputs/
+
+.lein-failures
+.lein-repl-history
+.nrepl-port
+repl-port
+*.properties
+*.extract-native-dependencies
