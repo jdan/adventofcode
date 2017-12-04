@@ -68,8 +68,7 @@
   [x y]
   (+ (Math/abs x) (Math/abs y)))
 
-(defn part-a
-  [lines]
+(defn part-a [lines]
   (let
    [input (Integer. (first lines))
     [_ _ [x y]]
@@ -80,6 +79,36 @@
       :direction :right
       :travel-length 0
       :left-before-turn 0
-      :get-square-value (fn [last-value _ _] (inc last-value))
+      :get-square-value (fn [last-value _ _]
+                          (inc last-value))
       :is-done #(= input %1)})]
     (distance x y)))
+
+(defn sum-neighbors
+  "Sums the value of all a cell's neighbors"
+  [board pos]
+  (let [[x y] pos]
+    (+ (get board [(inc x) y] 0)
+       (get board [(inc x) (inc y)] 0)
+       (get board [x (inc y)] 0)
+       (get board [(dec x) (inc y)] 0)
+       (get board [(dec x) y] 0)
+       (get board [(dec x) (dec y)] 0)
+       (get board [x (dec y)] 0)
+       (get board [(inc x) (dec y)] 0))))
+
+(defn part-b [lines]
+  (let
+   [input (Integer. (first lines))
+    [value _ _]
+    (run-spiral
+     {:board {[0 0] 1}
+      :pos [1 0]
+      :last-value 1
+      :direction :right
+      :travel-length 0
+      :left-before-turn 0
+      :get-square-value (fn [_ board pos]
+                          (sum-neighbors board pos))
+      :is-done #(> %1 input)})]
+    value))
