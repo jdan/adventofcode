@@ -31,4 +31,24 @@
     (is (= 4 (run "2017.03b" ["3"])))
     (is (= 10 (run "2017.03b" ["8"])))
     (is (= 23 (run "2017.03b" ["20"])))
-    (is (= 747 (run "2017.03b" ["700"])))))
+    (is (= 747 (run "2017.03b" ["700"]))))
+
+  (testing "2017 day 4A tests"
+    (is (= 1 (run "2017.04a" ["aa bb cc dd ee"])))
+    (is (= 0 (run "2017.04a" ["aa bb cc dd aa"])))
+    (is (= 1 (run "2017.04a" ["aa bb cc dd ee aaa"])))
+    (is (= 2 (run "2017.04a" ["aa bb cc dd ee"
+                              "aa bb cc dd aa"
+                              "aa bb cc dd ee aaa"]))))
+
+  (testing "2017 day 4B tests"
+    (is (= 1 (run "2017.04b" ["abcde fghij"])))
+    (is (= 0 (run "2017.04b" ["abcde xyz ecdab"])))
+    (is (= 1 (run "2017.04b" ["a ab abc abd abf abj"])))
+    (is (= 1 (run "2017.04b" ["iiii oiii ooii oooi oooo"])))
+    (is (= 0 (run "2017.04b" ["oiii ioii iioi iiio"])))
+    (is (= 3 (run "2017.04b" ["abcde fghij"
+                              "abcde xyz ecdab"
+                              "a ab abc abd abf abj"
+                              "iiii oiii ooii oooi oooo"
+                              "oiii ioii iioi iiio"])))))
