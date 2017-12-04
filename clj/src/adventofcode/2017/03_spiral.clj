@@ -68,7 +68,7 @@
   [x y]
   (+ (Math/abs x) (Math/abs y)))
 
-(defn run-2017-03a
+(defn part-a
   [lines]
   (let
    [input (Integer. (first lines))

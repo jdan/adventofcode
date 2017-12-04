@@ -25,11 +25,11 @@
             0))
         input)))))
 
-(def run-2017-01a
+(def part-a
   (sum-matches
    (fn [input idx] (nth-mod input (inc idx)))))
 
-(def run-2017-01b
+(def part-b
   (sum-matches
    (fn [input idx]
      (nth-mod input

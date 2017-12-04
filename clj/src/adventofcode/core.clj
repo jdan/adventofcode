@@ -1,6 +1,10 @@
 (ns adventofcode.core
-  (require [adventofcode.2017.01-captcha :refer :all]
-           [adventofcode.2017.03-spiral :refer :all]))
+  (:require [adventofcode.2017.01-captcha
+             :refer [part-a part-b]
+             :rename {part-a run-2017-01a part-b run-2017-01b}]
+            [adventofcode.2017.03-spiral
+             :refer [part-a]
+             :rename {part-a run-2017-03a}]))
 
 (def runners
   {"2017.01a" run-2017-01a
