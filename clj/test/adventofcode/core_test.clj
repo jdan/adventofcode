@@ -51,4 +51,10 @@
                               "abcde xyz ecdab"
                               "a ab abc abd abf abj"
                               "iiii oiii ooii oooi oooo"
-                              "oiii ioii iioi iiio"])))))
+                              "oiii ioii iioi iiio"]))))
+
+  (testing "2017 day 5A tests"
+    (is (= 5 (run "2017.05a" ["0" "3" "0" "1" "-3"]))))
+
+    (testing "2017 day 5B tests"
+      (is (= 10 (run "2017.05b" ["0" "3" "0" "1" "-3"])))))
