@@ -59,5 +59,8 @@
   (testing "2017 day 5B tests"
     (is (= 10 (run "2017.05b" ["0" "3" "0" "1" "-3"]))))
 
-    (testing "2017 day 6A tests"
-      (is (= 5 (run "2017.06a" ["0 2 7 0"])))))
+  (testing "2017 day 6A tests"
+    (is (= 5 (run "2017.06a" ["0 2 7 0"]))))
+
+  (testing "2017 day 6B tests"
+    (is (= 4 (run "2017.06b" ["0 2 7 0"])))))
