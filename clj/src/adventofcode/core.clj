@@ -17,7 +17,10 @@
    [adventofcode.2017.06-memory
     :refer [part-a part-b]
     :rename {part-a run-2017-06a
-    part-b run-2017-06b}]))
+             part-b run-2017-06b}]
+   [adventofcode.2017.07-dependencies
+    :refer [part-a]
+    :rename {part-a run-2017-07a}]))
 
 (def runners
   {"2017.01a" run-2017-01a
@@ -29,7 +32,8 @@
    "2017.05a" run-2017-05a
    "2017.05b" run-2017-05b
    "2017.06a" run-2017-06a
-   "2017.06b" run-2017-06b})
+   "2017.06b" run-2017-06b
+   "2017.07a" run-2017-07a})
 
 (defn run [id input]
   (let [runner (runners id)]

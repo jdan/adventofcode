@@ -63,4 +63,21 @@
     (is (= 5 (run "2017.06a" ["0 2 7 0"]))))
 
   (testing "2017 day 6B tests"
-    (is (= 4 (run "2017.06b" ["0 2 7 0"])))))
+    (is (= 4 (run "2017.06b" ["0 2 7 0"]))))
+
+  (testing "2017 day 7A tests"
+    (is (= "tknk"
+      (run "2017.07a"
+        ["pbga (66)"
+        "xhth (57)"
+        "ebii (61)"
+        "havc (66)"
+        "ktlj (57)"
+        "fwft (72) -> ktlj, cntj, xhth"
+        "qoyq (66)"
+        "padx (45) -> pbga, havc, qoyq"
+        "tknk (41) -> ugml, padx, fwft"
+        "jptl (61)"
+        "ugml (68) -> gyxo, ebii, jptl"
+        "gyxo (61)"
+        "cntj (57)"])))))
