@@ -3,6 +3,13 @@ inputs/
 .lein-failures
 .lein-repl-history
 .nrepl-port
+.lein-deps-sum
 repl-port
 *.properties
 *.extract-native-dependencies
+pom.xml
+
+classes/
+lib/
+
+*.bak
