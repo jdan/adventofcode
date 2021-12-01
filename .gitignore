@@ -13,3 +13,4 @@ classes/
 lib/
 
 *.bak
+node_modules/
