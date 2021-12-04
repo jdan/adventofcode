@@ -1,9 +1,15 @@
 import fs from "fs";
 
+export function stdin() {
+  return fs.readFileSync(0, "utf-8");
+}
+
 export function strings() {
-  return fs
-    .readFileSync(0, "utf-8")
-    .split("\n");
+  return stdin().split("\n");
+}
+
+export function paragraphs() {
+  return stdin().split("\n\n");
 }
 
 export function numbers() {
