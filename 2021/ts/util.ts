@@ -4,6 +4,12 @@ export function stdin() {
   return fs.readFileSync(0, "utf-8");
 }
 
+export function numberLine() {
+  return stdin()
+    .split(",")
+    .map((n) => parseInt(n));
+}
+
 export function strings(): string[] {
   return stdin().split("\n");
 }
