@@ -25,3 +25,12 @@ export function numbers() {
 export function sum(ls: number[]) {
   return ls.reduce((sum, n) => sum + n);
 }
+
+export function intersection<T>(
+  a: Set<T>,
+  b: Set<T>
+): Set<T> {
+  return new Set(
+    [...a].filter((v) => b.has(v))
+  );
+}
