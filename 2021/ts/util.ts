@@ -34,3 +34,32 @@ export function intersection<T>(
     [...a].filter((v) => b.has(v))
   );
 }
+
+export function permutations<T>(
+  arr: T[]
+): T[][] {
+  if (arr.length === 0) {
+    return [[]];
+  } else {
+    return arr.flatMap((value, idx) => {
+      const tail = permutations([
+        ...arr.slice(0, idx),
+        ...arr.slice(idx + 1),
+      ]);
+      return tail.map((sub) => [
+        value,
+        ...sub,
+      ]);
+    });
+  }
+}
+
+export function equals<T>(
+  a: Set<T>,
+  b: Set<T>
+): boolean {
+  return (
+    a.size === b.size &&
+    [...a].every((val) => b.has(val))
+  );
+}
