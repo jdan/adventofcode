@@ -47,12 +47,12 @@ function flood(
 
     const neighborValue = value(
       heightMap,
-      neighborCol,
-      neighborRow
+      neighborRow,
+      neighborCol
     );
     if (
       neighborValue < 9 &&
-      neighborValue > heightMap[row][col]
+      neighborValue !== heightMap[row][col]
     ) {
       basinMap[neighborRow][neighborCol] =
         id;
@@ -73,11 +73,30 @@ for (
     col++
   ) {
     const height = heightMap[row][col];
-    if (!basinMap[row][col]) {
-      basinMap[row][col] = currentBasinId++;
+    if (
+      height !== 9 &&
+      !basinMap[row][col]
+    ) {
+      basinMap[row][col] = currentBasinId;
       flood(row, col, currentBasinId);
+      currentBasinId++;
     }
   }
 }
 
-console.log(basinMap);
+const basinSizes: { [key: number]: number } =
+  {};
+basinMap.forEach((row) =>
+  row.forEach((basinId) => {
+    if (basinId === 0) return;
+    basinSizes[basinId] ||= 0;
+    basinSizes[basinId]++;
+  })
+);
+
+console.log(
+  Object.values(basinSizes)
+    .sort((a, b) => b - a)
+    .slice(0, 3)
+    .reduce((a, b) => a * b, 1)
+);
