@@ -1,4 +1,6 @@
 {
   "//": "I'm gonna write about this",
-  "printWidth": 45
+  "printWidth": 45,
+  "semi": false,
+  "arrowParens": "avoid"
 }
