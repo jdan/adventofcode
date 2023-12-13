@@ -75,7 +75,11 @@ class Record:
             if i >= len(self.groups):
                 return False
 
-            if groups[i] > self.groups[i]:
+            # The last group can be less
+            if i == len(groups) - 1:
+                if groups[i] > self.groups[i]:
+                    return False
+            elif groups[i] != self.groups[i]:
                 return False
 
         return True
