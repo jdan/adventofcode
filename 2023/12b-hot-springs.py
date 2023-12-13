@@ -8,6 +8,7 @@ class Record:
     def __init__(self, pattern: Arrangement, groups: list[int]):
         self.pattern = pattern
         self.groups = groups
+        self.n = 0
 
     def num_possible_arrangements(self):
         wildcard_indices = [idx for idx, cell in enumerate(self.pattern) if cell == "?"]
@@ -20,6 +21,9 @@ class Record:
 
             if len(replacements) == num_wildcards:
                 if self.is_valid(arrangement):
+                    self.n += 1
+                    if self.n % 1000 == 0:
+                        print(self.n)
                     return 1
                 else:
                     return 0
@@ -71,6 +75,15 @@ class Record:
         if current_group > 0:
             groups.append(current_group)
 
+        # Optimization, we're out of room!
+        # how many characters appear "?" onward?
+        # if it's more than the number of groups we have left, we're out of room
+        chars_remaining = len(arrangement) - arrangement.index("?")
+        groups_left = len(self.groups) - len(groups)
+        # might be able to divide by 2, tbd
+        if groups_left > chars_remaining // 2:
+            return False
+
         for i in range(len(groups)):
             if i >= len(self.groups):
                 return False
@@ -87,9 +100,16 @@ class Record:
 arrangement_sum = 0
 for idx, line in enumerate(sys.stdin.readlines()):
     pattern, groups = line.strip().split(" ")
+    groups = list(map(int, groups.split(",")))
+
+    repeated_pattern = "?".join([pattern] * 5)
+    repeated_groups = groups * 5
+
+    print(repeated_pattern, repeated_groups)
+
     record = Record(
-        typing.cast(Arrangement, list(pattern)),
-        list(map(int, groups.split(",")))
+        typing.cast(Arrangement, list(repeated_pattern)),
+        repeated_groups
     )
 
     arrangement_sum += record.num_possible_arrangements()
