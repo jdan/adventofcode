@@ -17,7 +17,7 @@ class Numeric
 end
 
 def possible?(goal, ns)
-  # loop through all possible combinations of (n-1) :+ or :*'s
+  # loop through all possible combinations of (n-1) :+'s, :*'s, or :cat's
   [:+, :*, :cat].repeated_permutation(ns.size - 1).any? do |ops|
     goal == ns.reduce { |acc, n| acc.send(ops.shift, n) }
   end
