@@ -1,0 +1,11 @@
+Lint/UnusedBlockArgument:
+  Severity: warning
+  AutoCorrect: false
+
+Lint/UnusedMethodArgument:
+  Severity: warning
+  AutoCorrect: false
+
+Lint/UselessAssignment:
+  Severity: warning
+  AutoCorrect: false
