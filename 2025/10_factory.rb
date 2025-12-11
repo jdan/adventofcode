@@ -35,9 +35,74 @@ module Solution
     end
   end
 
+  ##
+  # Done with Claude Code and the GLPK library
+  # https://www.gnu.org/software/glpk/
+  #
+  # I knew I needed linear programming but not interested in learning it
   def self.part_b(input)
-    buttons_re, joltage_re = /(\(.+\) )+(\{.+\})/.match(line).captures
+    input.lines.map { |line| min_presses_joltage(line.chomp) }.sum
+  end
+
+  def self.min_presses_joltage(line)
+    require 'tempfile'
+
+    # Extract buttons and joltage requirements
+    match = /(\(.+\) )+\{(.+)\}/.match(line)
+    buttons_str = match[1].strip
+    joltage_str = match[2]
+
+    # Parse buttons: each button is a list of counter indices
+    buttons = buttons_str.split(' ').map do |schematic|
+      schematic[1...-1].split(',').map(&:to_i)
+    end
+
+    # Parse target joltage levels
+    target = joltage_str.split(',').map(&:to_i)
+
+    num_buttons = buttons.length
+    num_counters = target.length
+
+    # Create CPLEX LP format file
+    Tempfile.create(['problem', '.lp']) do |lp_file|
+      # Write objective
+      lp_file.puts 'Minimize'
+      lp_file.puts ' obj: ' + (0...num_buttons).map { |i| "x#{i}" }.join(' + ')
+
+      # Write constraints
+      lp_file.puts 'Subject To'
+      num_counters.times do |counter_idx|
+        # Find which buttons affect this counter
+        coeffs = num_buttons.times.map do |button_idx|
+          buttons[button_idx].include?(counter_idx) ? "x#{button_idx}" : nil
+        end.compact
+
+        lp_file.puts " c#{counter_idx}: #{coeffs.join(' + ')} = #{target[counter_idx]}" if coeffs.any?
+      end
+
+      # Write bounds (all variables are non-negative integers)
+      lp_file.puts 'Bounds'
+      num_buttons.times do |i|
+        lp_file.puts " 0 <= x#{i}"
+      end
+
+      # Declare integer variables
+      lp_file.puts 'General'
+      lp_file.puts ' ' + (0...num_buttons).map { |i| "x#{i}" }.join(' ')
+
+      lp_file.puts 'End'
+      lp_file.flush
+
+      # Solve using glpsol
+      output = `glpsol --lp #{lp_file.path} --output /dev/stdout 2>/dev/null`
+
+      # Parse the objective value from output
+      return match[1].to_f.round if match = output.match(/Objective:\s+obj\s+=\s+(\d+(?:\.\d+)?)/m)
+
+      raise "Failed to solve: #{output}"
+    end
   end
 end
 
-p Solution.part_a $stdin.read
+# p Solution.part_a $stdin.read
+p Solution.part_b $stdin.read
