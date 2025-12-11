@@ -31,28 +31,32 @@ module Solution
 
   def self.part_b(input)
     graph = parse_graph(input)
-    paths = find_all_paths(graph, 'svr', 'out')
-    paths.count { |path| path.include?('dac') && path.include?('fft') }
+
+    # Assume the graph is a DAG and use DP
+    # Count paths from svr to out with both dac and fft visited
+    memo = {}
+    count_paths_dag(graph, 'svr', 'out', false, false, memo)
   end
 
-  def self.find_all_paths(graph, current, target, visited = Set.new, path = [])
-    path = path + [current]
+  def self.count_paths_dag(graph, current, target, seen_dac, seen_fft, memo)
+    # Update if we've seen dac or fft
+    seen_dac = true if current == 'dac'
+    seen_fft = true if current == 'fft'
 
-    if current == target
-      return [path]
-    end
+    # If we reached the target, count this path only if we've seen both
+    return (seen_dac && seen_fft) ? 1 : 0 if current == target
 
-    visited.add(current)
-    all_paths = []
+    # Memoization key (works if graph is a DAG - no cycles)
+    memo_key = [current, seen_dac, seen_fft]
+    return memo[memo_key] if memo.key?(memo_key)
 
+    count = 0
     (graph[current] || []).each do |neighbor|
-      unless visited.include?(neighbor)
-        all_paths += find_all_paths(graph, neighbor, target, visited, path)
-      end
+      count += count_paths_dag(graph, neighbor, target, seen_dac, seen_fft, memo)
     end
 
-    visited.delete(current) # backtrack
-    all_paths
+    memo[memo_key] = count
+    count
   end
 end
 
